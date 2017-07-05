@@ -16,13 +16,34 @@ export default class JournalItem extends React.Component {
     let entry = this.props.entry;
 
     return (
-      <div className='journal-item'>
-        <p>Date: {entry.date}</p>
-        <p>Duration: {`${entry.duration.h}:${entry.duration.m}`}</p>
-        <p>Log: {entry.log}</p>
-        <p>Link: {entry.link}</p>
-        <button onClick={this.editEntry.bind(this)}>Edit</button>
-        <button onClick={this.deleteEntry.bind(this)}>Delete</button>
+      <div className='wrapper'>
+        <div className='journal-item'>
+          <div className='journal-item__date-time journal-item__row'>
+            <div className='label-data-pair'>
+              <div className='label-data-pair__label'>Date:</div> 
+              <div className='label-data-pair__data'>{entry.date}</div>
+            </div>
+
+            <div className='label-data-pair'>
+              <div className='label-data-pair__label'>Duration:</div> 
+              <div className='label-data-pair__data'>{`${entry.duration.h}:${entry.duration.m}`}</div>
+            </div>
+          </div>
+
+          <div className='label-data-pair journal-item__row'>
+            <div className='label-data-pair__label'>Log:</div> 
+            <div className='label-data-pair__data'>{entry.log}</div>
+          </div>
+
+          <div className='label-data-pair journal-item__row'>
+            <div className='label-data-pair__label'>Link:</div> 
+            <div className='label-data-pair__data'>{entry.link}</div>
+          </div>
+
+          <button className='button button--dark' onClick={this.editEntry.bind(this)}>Edit</button>
+          <button className='button button--dark' onClick={this.deleteEntry.bind(this)}>Delete</button>
+          <button className='button button--dark' disabled>Share</button>
+        </div>
       </div>
     );
   }

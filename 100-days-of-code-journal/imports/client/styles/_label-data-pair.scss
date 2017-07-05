@@ -1,0 +1,18 @@
+.label-data-pair {
+}
+
+.label-data-pair__label {
+  font-size: $labelFontSize;
+  font-weight: $labelFontWeight;
+  margin: $miniMargin;
+}
+
+.label-data-pair__data {
+  font-size: $textFontSize;
+  font-weight: $textFontWeight;
+  margin: $miniMargin;
+}
+
+.label-data-pair--flex-grow {
+  flex-grow: 1;
+}

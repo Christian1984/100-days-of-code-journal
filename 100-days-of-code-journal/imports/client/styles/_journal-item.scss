@@ -1,0 +1,30 @@
+.journal-item {
+  background-color: white;
+  border: 1px black solid;
+  border-radius: 1rem;
+  padding: $standardMargin;
+}
+
+.journal-item__row {
+  margin: $standardMargin 0;
+}
+
+.journal-item__date-time {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.journal-item__pair {
+  padding: $miniMargin;
+}
+
+.journal-item__label {
+  font-size: $labelFontSize;
+  font-weight: $labelFontWeight;
+}
+
+.journal-item__data {
+  font-size: $textFontSize;
+  font-weight: $textFontWeight;
+}

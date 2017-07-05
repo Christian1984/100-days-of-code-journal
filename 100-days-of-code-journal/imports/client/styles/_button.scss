@@ -1,0 +1,36 @@
+.button {
+  background-color: transparent;
+  border: 1px white solid;
+  border-radius: 1rem;
+  color: white;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1;
+  margin: $miniMargin;
+  outline: none;
+  padding: $standardMargin;
+  transition: transform .2s ease, background-color .2s ease;
+
+  &:hover, &:focus {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+
+  &:active {
+    background-color: rgba(255, 255, 255, 0.6);
+    transform: scale(0.9);
+  }
+}
+
+.button--dark {
+  border: 1px black solid;
+  color: black;
+  
+  &:hover, &:focus { 
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  &:active {
+    background-color: rgba(0, 0, 0, 0.6);
+    transform: scale(0.9);
+  }
+}

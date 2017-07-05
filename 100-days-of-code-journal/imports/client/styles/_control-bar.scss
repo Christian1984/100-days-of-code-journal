@@ -1,0 +1,14 @@
+.control-bar {
+  background-color: #7F3737;
+  color: white;
+}
+
+.control-bar__flex-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.control-bar__timer {
+  margin: 0 $standardMargin;
+}

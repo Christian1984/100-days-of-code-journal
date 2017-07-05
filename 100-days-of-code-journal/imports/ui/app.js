@@ -10,7 +10,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <TitleBar title='100 Days of Code Journal' />
+        <TitleBar title='#100DaysOfCode Journal' subtitle='made by chris' />
         <ControlBar journalEntries={this.props.journalEntries} />
         <JournalForm />
         {/*<div className='progress-gauge'></div>*/}

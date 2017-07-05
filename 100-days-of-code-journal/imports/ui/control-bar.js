@@ -22,13 +22,20 @@ export default class ControlBar extends React.Component {
     let totalTime = this.getTotalTime();
     return (
         <div className='control-bar'>
-          <button>Play/Pause</button>
-          <div>TIME TODAY</div>
-          <div>
-            <div>Total Time: </div>
-            <div>{`${totalTime.h}:${totalTime.m}`}</div>
+          <div className='wrapper'>
+            <div className='control-bar__flex-wrapper'>
+              <button className='button'>Play/Pause</button>
+              <div className='control-bar__timer label-data-pair'>
+                <div className='label-data-pair__label'>Time (Today):</div>
+                <div className='label-data-pair__data'>00:00:00</div>
+              </div>
+              <div className='control-bar__timer label-data-pair'>
+                <div className='label-data-pair__label'>Time (Total): </div>
+                <div className='label-data-pair__data'>{`${totalTime.h}:${totalTime.m}:00`}</div>
+              </div>
+              <button className='button'>Finish</button>
+            </div>
           </div>
-          <button>Finish</button>
         </div>
     );
   }

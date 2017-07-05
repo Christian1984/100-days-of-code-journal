@@ -1,0 +1,33 @@
+$standardMargin: 1.3rem;
+$miniMargin: 0.3rem;
+
+$textFontSize: 1.6rem;
+$textFontWeight: 300;
+
+$labelFontSize: 0.9rem;
+$labelFontWeight: 100;
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background-color: #f2f2f2;
+  color: #555;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1.6rem;
+  font-weight: 300;
+}
+
+@import './styles/wrapper';
+@import './styles/button';
+@import './styles/title-bar';
+@import './styles/control-bar';
+@import './styles/journal-item';
+@import './styles/form';
+@import './styles/label-data-pair';

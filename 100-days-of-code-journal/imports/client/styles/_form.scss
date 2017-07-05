@@ -1,0 +1,33 @@
+.form {
+  background-color: white;
+  border: 1px black solid;
+  border-radius: 1rem;
+  padding: $standardMargin;
+}
+
+.form__row {
+  margin: $standardMargin 0;
+}
+
+.form__date-time {
+  display: flex;
+  //align-items: center;
+  justify-content: space-between;
+}
+
+.form__input {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: $textFontSize;
+  font-weight: $textFontWeight;
+  border: 1px #555 solid;
+  outline: none;
+  padding: $miniMargin;
+}
+
+.form__child--flex {
+  display: flex;
+}
+
+.form__input--flex-grow {
+  flex-grow: 1;
+}

@@ -1,0 +1,22 @@
+.title-bar {
+  background-color: #f22;
+  color: white;
+}
+
+.title-bar__flex-wrapper {
+  display: flex;
+}
+
+.title-bar__title {
+  flex-shrink: 0;
+  font-weight: 300;
+  font-size: 4rem;
+}
+
+.title-bar__subtitle {
+  flex-shrink: 0;
+  font-weight: 100;
+  font-size: 1.3rem;
+  font-style: italic;
+  //text-align: right;
+}
