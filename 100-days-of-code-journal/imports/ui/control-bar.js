@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 
 import Moment from 'moment';
 
+import ProgressBar from './progress-bar';
+
 export default class ControlBar extends React.Component {
+  dailyTargetSeconds = 60;
+
   constructor() {
     super();
 
@@ -61,6 +65,8 @@ export default class ControlBar extends React.Component {
 
   render() {
     let totalTime = this.getTotalTime();
+    let progress = this.state.currentSeconds / this.dailyTargetSeconds * 100;
+
     return (
         <div className='control-bar'>
           <div className='wrapper'>
@@ -76,6 +82,7 @@ export default class ControlBar extends React.Component {
               </div>
               <button className='button' onClick={this.stopStopwatch.bind(this)}>Finish</button>
             </div>
+            <ProgressBar name='Today' currPercentage={progress} />
           </div>
         </div>
     );

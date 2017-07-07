@@ -1,0 +1,44 @@
+$radius: 1.6rem;
+
+.progress-bar {
+  display: flex;
+  margin: $radius/4 0;
+}
+
+.progress-bar__name {
+  margin: 0 $radius/4;
+  font-size: $radius;
+  font-weight: 100;
+}
+
+.progress-bar__meter__background {
+  background-color: black;
+  border: 1px solid white;
+  border-radius: $radius;
+  flex-grow: 1;
+  height: $radius;
+  //width: 100%;
+  margin: 0 $radius/4;
+}
+
+.progress-bar__meter__meter {
+  background-color: green;
+  border-radius: $radius;
+  height: $radius;
+  //width: 50%;
+  min-width: $radius;
+  max-width: 100%;
+}
+
+.progress-bar__overflow {
+  background-color: black;
+  border: 1px solid white;
+  border-radius: $radius;
+  height: $radius;
+  margin: 0 $radius/4;
+  width: $radius;
+}
+
+.progress-bar__overflow--active {
+  background-color: green;
+}
