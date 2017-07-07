@@ -14,8 +14,6 @@ export default class ControlBar extends React.Component {
   }
 
   stopWatchTick() {
-    console.log('tick');
-
     if (this.state.isRunning) {
       this.setState({currentSeconds: this.state.currentSeconds + 1});
       setTimeout(this.stopWatchTick.bind(this), 1000);

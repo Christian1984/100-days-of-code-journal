@@ -13,8 +13,8 @@ export default class JournalForm extends React.Component {
         h: durationComponents[0],
         m: durationComponents[1]
       },
-      log: logData,
-      link: link
+      log: logData.trim().split('\n'),
+      link: link.trim()
     }
 
     //TODO: check if there is already an entry for today, if so, update

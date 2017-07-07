@@ -12,6 +12,14 @@ export default class JournalItem extends React.Component {
     console.log(`edit button for entry with _id ${this.props.entry._id} clicked!`);
   }
 
+  renderLogs(logs) {
+    if (typeof logs === 'string') {
+      return <div className='label-data-pair__data'>{logs}</div>
+    }
+
+    return logs.map((log, i) => <div key={i} className='label-data-pair__data'>{log}</div>);
+  }
+
   render() {
     let entry = this.props.entry;
 
@@ -32,7 +40,7 @@ export default class JournalItem extends React.Component {
 
           <div className='label-data-pair journal-item__row'>
             <div className='label-data-pair__label'>Log:</div> 
-            <div className='label-data-pair__data'>{entry.log}</div>
+            {this.renderLogs(entry.log)}
           </div>
 
           <div className='label-data-pair journal-item__row'>
