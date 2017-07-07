@@ -20,6 +20,15 @@ export default class JournalItem extends React.Component {
     return logs.map((log, i) => <div key={i} className='label-data-pair__data'>{log}</div>);
   }
 
+  renderLink(link) {
+    console.log(typeof link);
+    if (typeof link === 'string') {
+      return <div className='label-data-pair__data'><a href={link} className='journal-item__link'>{link}</a></div>
+    }
+
+    return <div className='label-data-pair__data'><a href={link.url} className='journal-item__link'>{link.project}</a></div>
+  }
+
   render() {
     let entry = this.props.entry;
 
@@ -45,7 +54,7 @@ export default class JournalItem extends React.Component {
 
           <div className='label-data-pair journal-item__row'>
             <div className='label-data-pair__label'>Link:</div> 
-            <div className='label-data-pair__data'>{entry.link}</div>
+            {this.renderLink(entry.link)}
           </div>
 
           <button className='button button--dark' onClick={this.editEntry.bind(this)}>Edit</button>

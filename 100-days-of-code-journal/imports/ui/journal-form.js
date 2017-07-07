@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { JournalEntries } from './../api/journal-entries';
 
 export default class JournalForm extends React.Component {
-  createOrUpdateEntry(date, duration, logData, link) {
+  createOrUpdateEntry(date, duration, logData, linkProject, linkUrl) {
     let durationComponents = duration.split(':');
 
     let journalEntry = {
@@ -14,7 +14,10 @@ export default class JournalForm extends React.Component {
         m: durationComponents[1]
       },
       log: logData.trim().split('\n'),
-      link: link.trim()
+      link: {
+        project: linkProject.trim(),
+        url: linkUrl.trim()
+      }
     }
 
     //TODO: check if there is already an entry for today, if so, update
@@ -44,9 +47,10 @@ export default class JournalForm extends React.Component {
     let date = e.target.date.value;
     let duration = e.target.duration.value;
     let logData = e.target.log.value;
-    let link = e.target.link.value;
+    let linkProject = e.target.linkProject.value;
+    let linkUrl = e.target.linkUrl.value;
 
-    if (!date || !duration || !logData || !link) {
+    if (!date || !duration || !logData || !linkProject || !linkUrl) {
       console.log('Journal Entry not complete!');
       //todo: handle
       return;
@@ -55,9 +59,10 @@ export default class JournalForm extends React.Component {
     e.target.date.value = '';
     e.target.duration.value = '';
     e.target.log.value = '';
-    e.target.link.value = '';
+    e.target.linkProject.value = '';
+    e.target.linkUrl.value = '';
 
-    this.createOrUpdateEntry(date, duration, logData, link);
+    this.createOrUpdateEntry(date, duration, logData, linkProject, linkUrl);
   }
 
   renderDeleteButton() {
@@ -97,7 +102,10 @@ export default class JournalForm extends React.Component {
             <div className='label-data-pair form__row'>
               <div className='label-data-pair__label'>Link</div>
               <div className='label-data-pair__data form__child--flex'>
-                <input className='form__input form__input--flex-grow' type='text' id='link' name='link' placeholder='Link' />
+                <input className='form__input form__input--flex-grow' type='text' id='linkProject' name='linkProject' placeholder='Project Name' />
+              </div>
+              <div className='label-data-pair__data form__child--flex'>
+                <input className='form__input form__input--flex-grow' type='text' id='linkUrl' name='linkUrl' placeholder='URL' />
               </div>
             </div>
 
