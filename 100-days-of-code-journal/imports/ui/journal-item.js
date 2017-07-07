@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { setTimeToMidnight } from './../utils/date';
 
 import { JournalEntries } from './../api/journal-entries';
 
@@ -21,7 +22,6 @@ export default class JournalItem extends React.Component {
   }
 
   renderLink(link) {
-    console.log(typeof link);
     if (typeof link === 'string') {
       return <div className='label-data-pair__data'><a href={link} className='journal-item__link'>{link}</a></div>
     }
@@ -31,6 +31,9 @@ export default class JournalItem extends React.Component {
 
   render() {
     let entry = this.props.entry;
+
+    //console.log(entry.date);
+    //console.log(setTimeToMidnight(entry.date));
 
     return (
       <div className='wrapper'>
