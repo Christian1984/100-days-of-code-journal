@@ -6,7 +6,8 @@ import Moment from 'moment';
 import ProgressBar from './progress-bar';
 
 export default class ControlBar extends React.Component {
-  dailyTargetSeconds = 60;
+  dailyTargetSeconds = 3600;
+  totalTargetDays = 100;
 
   constructor() {
     super();
@@ -65,7 +66,8 @@ export default class ControlBar extends React.Component {
 
   render() {
     let totalTime = this.getTotalTime();
-    let progress = this.state.currentSeconds / this.dailyTargetSeconds * 100;
+    let progressToday = this.state.currentSeconds / this.dailyTargetSeconds * 100;
+    let progressTotal = this.props.journalEntries.length / this.totalTargetDays * 100;
 
     return (
         <div className='control-bar'>
@@ -82,7 +84,8 @@ export default class ControlBar extends React.Component {
               </div>
               <button className='button' onClick={this.stopStopwatch.bind(this)}>Finish</button>
             </div>
-            <ProgressBar name='Today' currPercentage={progress} />
+            <ProgressBar name="Today's Progress" currPercentage={progressToday} />
+            <ProgressBar name="Total Progress" currPercentage={progressTotal} />
           </div>
         </div>
     );

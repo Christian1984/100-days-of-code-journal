@@ -1,14 +1,17 @@
 $radius: 1.6rem;
 
 .progress-bar {
+  margin: $radius/2 0;
+}
+
+.progress-bar__flex-wrapper {
   display: flex;
-  margin: $radius/4 0;
 }
 
 .progress-bar__name {
-  margin: 0 $radius/4;
-  font-size: $radius;
-  font-weight: 100;
+  margin: $radius/4;
+  //font-size: $radius;
+  //font-weight: 100;
 }
 
 .progress-bar__meter__background {
@@ -27,6 +30,7 @@ $radius: 1.6rem;
   height: $radius;
   //width: 50%;
   min-width: $radius;
+  //max-height: $radius;
   max-width: 100%;
 }
 
