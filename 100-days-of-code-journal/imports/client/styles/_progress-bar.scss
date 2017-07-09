@@ -1,4 +1,6 @@
 $radius: 1.6rem;
+$offcolor: rgba(255, 255, 255, 0.3);
+$oncolor: white;
 
 .progress-bar {
   margin: $radius/2 0;
@@ -15,7 +17,7 @@ $radius: 1.6rem;
 }
 
 .progress-bar__meter__background {
-  background-color: black;
+  background-color: $offcolor;
   border: 1px solid white;
   border-radius: $radius;
   flex-grow: 1;
@@ -25,7 +27,7 @@ $radius: 1.6rem;
 }
 
 .progress-bar__meter__meter {
-  background-color: green;
+  background-color: $oncolor;
   border-radius: $radius;
   height: $radius;
   //width: 50%;
@@ -35,14 +37,20 @@ $radius: 1.6rem;
 }
 
 .progress-bar__overflow {
-  background-color: black;
+  background-color: $offcolor;
   border: 1px solid white;
   border-radius: $radius;
+  color: transparent;
+  font-size: $labelFontSize;
+  font-weight: $labelFontWeight;
   height: $radius;
   margin: 0 $radius/4;
+  text-align: center;
+  line-height: $radius;
   width: $radius;
 }
 
 .progress-bar__overflow--active {
-  background-color: green;
+  background-color: $oncolor;
+  color: #999;
 }

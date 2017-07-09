@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 export default class ProgressBar extends React.Component {
   renderOverflow() {
     var className = `progress-bar__overflow ${this.props.currPercentage > 100 ? ' progress-bar__overflow--active' : ''}`;
-    return <div className={className}></div>
+    return <div className={className}>&gt;&gt;</div>
   }
 
   render() {

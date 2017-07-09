@@ -1,3 +1,7 @@
+.form-background {
+  background-color: $darkred;
+}
+
 .form {
   background-color: white;
   border: 1px black solid;
@@ -30,4 +34,8 @@
 
 .form__input--flex-grow {
   flex-grow: 1;
+}
+
+.form__input--multiline {
+  min-height: 10rem;
 }

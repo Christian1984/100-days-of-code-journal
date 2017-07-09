@@ -73,45 +73,47 @@ export default class JournalForm extends React.Component {
   
   render() {
     return (
-      <div className='wrapper'>
-        <div className='form'>
-          <form onSubmit={this.handleSubmit.bind(this)}>
-            <div className='form__date-time form__row'>
-              <div className='label-data-pair label-data-pair--flex-grow'>
-                <div className='label-data-pair__label'>Date</div>
+      <div className='form-background'>
+        <div className='wrapper'>
+          <div className='form'>
+            <form onSubmit={this.handleSubmit.bind(this)}>
+              <div className='form__date-time form__row'>
+                <div className='label-data-pair label-data-pair--flex-grow'>
+                  <div className='label-data-pair__label'>Date</div>
+                  <div className='label-data-pair__data form__child--flex'>
+                    <input className='form__input form__input--flex-grow' type='date' id='date' name='date' />
+                  </div>
+                </div>
+
+                <div className='label-data-pair'>
+                  <div className='label-data-pair__label'>Duration (Today)</div>
+                  <div className='label-data-pair__data'>
+                    <input className='form__input' type='time' id='duration' name='duration' />
+                  </div>
+                </div>
+              </div>
+
+              <div className='label-data-pair form__row'>
+                <div className='label-data-pair__label'>Log</div>
                 <div className='label-data-pair__data form__child--flex'>
-                  <input className='form__input form__input--flex-grow' type='date' id='date' name='date' />
+                  <textarea className='form__input form__input--flex-grow form__input--multiline' type='text' id='log' name='log' placeholder='Log' />
                 </div>
               </div>
 
-              <div className='label-data-pair'>
-                <div className='label-data-pair__label'>Duration (Today)</div>
-                <div className='label-data-pair__data'>
-                  <input className='form__input' type='time' id='duration' name='duration' />
+              <div className='label-data-pair form__row'>
+                <div className='label-data-pair__label'>Link</div>
+                <div className='label-data-pair__data form__child--flex'>
+                  <input className='form__input form__input--flex-grow' type='text' id='linkProject' name='linkProject' placeholder='Project Name' />
+                </div>
+                <div className='label-data-pair__data form__child--flex'>
+                  <input className='form__input form__input--flex-grow' type='text' id='linkUrl' name='linkUrl' placeholder='URL' />
                 </div>
               </div>
-            </div>
 
-            <div className='label-data-pair form__row'>
-              <div className='label-data-pair__label'>Log</div>
-              <div className='label-data-pair__data form__child--flex'>
-                <textarea className='form__input form__input--flex-grow' type='text' id='log' name='log' placeholder='Log' />
-              </div>
-            </div>
-
-            <div className='label-data-pair form__row'>
-              <div className='label-data-pair__label'>Link</div>
-              <div className='label-data-pair__data form__child--flex'>
-                <input className='form__input form__input--flex-grow' type='text' id='linkProject' name='linkProject' placeholder='Project Name' />
-              </div>
-              <div className='label-data-pair__data form__child--flex'>
-                <input className='form__input form__input--flex-grow' type='text' id='linkUrl' name='linkUrl' placeholder='URL' />
-              </div>
-            </div>
-
-            <button className='button button--dark' action='submit'>Submit</button>
-            {/*this.renderDeleteButton()*/}
-          </form>
+              <button className='button button--dark' action='submit'>Submit</button>
+              {/*this.renderDeleteButton()*/}
+            </form>
+          </div>
         </div>
       </div>
     );
