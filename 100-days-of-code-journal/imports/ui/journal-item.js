@@ -34,9 +34,20 @@ export default class JournalItem extends React.Component {
 
     //console.log(entry.date);
     //console.log(setTimeToMidnight(entry.date));
+    if (entry.isSkippedDay) {
+      return (
+          <div className='journal-item'>
+            <div className='label-data-pair'>
+              <div className='label-data-pair__label'>Date:</div> 
+              <div className='label-data-pair__data'>{entry.date}</div>
+            </div>
+
+            day skipped :-(
+          </div>
+      );
+    }
 
     return (
-      <div className='wrapper'>
         <div className='journal-item'>
           <div className='journal-item__date-time journal-item__row'>
             <div className='label-data-pair'>
@@ -46,7 +57,7 @@ export default class JournalItem extends React.Component {
 
             <div className='label-data-pair'>
               <div className='label-data-pair__label'>Duration:</div> 
-              <div className='label-data-pair__data'>{`${entry.duration.h}:${entry.duration.m}`}</div>
+              <div className='label-data-pair__data'>{/*`${entry.duration.h}:${entry.duration.m}`*/}</div>
             </div>
           </div>
 
@@ -64,7 +75,6 @@ export default class JournalItem extends React.Component {
           <button className='button button--dark' onClick={this.deleteEntry.bind(this)}>Delete</button>
           <button className='button button--dark' disabled>Share</button>
         </div>
-      </div>
     );
   }
 }
