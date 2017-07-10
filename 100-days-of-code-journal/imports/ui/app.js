@@ -13,7 +13,6 @@ export default class App extends React.Component {
         <TitleBar title='#100DaysOfCode Journal' subtitle='made by chris' />
         <ControlBar journalEntries={this.props.journalEntries} />
         <JournalForm />
-        {/*<div className='progress-gauge'></div>*/}
         <Journal journalEntries={this.props.journalEntries} />
       </div>        
     );

@@ -30,6 +30,24 @@
   font-weight: $textFontWeight;
 }
 
+.journal-item__icon {
+  height: 4rem;
+  margin-right: 1rem;
+  width: 4rem;
+}
+
+.journal-item__icon--check {
+  fill: green;
+}
+
+.journal-item__icon--cross {
+  fill: red;
+}
+
 .journal-item__link {
   color: #555;
+}
+
+.journal-item--italic {
+  font-style: italic;
 }

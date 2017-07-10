@@ -2,6 +2,8 @@ import { Meteor } from 'meteor/meteor';
 import { Tracker } from 'meteor/tracker';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Moment from 'moment';
+import * as locales from 'moment/min/locales';
 
 import { JournalEntries } from './../imports/api/journal-entries';
 
@@ -12,6 +14,15 @@ function getJournalEntries() {
 }
 
 Meteor.startup(() => {
+  var locale = window.navigator.userLanguage || window.navigator.language;
+  
+  if (!locale) { 
+    locale = 'en' 
+  }
+
+  Moment.locale(locale);
+  console.log('locale:', Moment.locale());
+
   Tracker.autorun(() => {
     console.log('client started!');
 
