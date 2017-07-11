@@ -52,17 +52,6 @@ export default class ControlBar extends React.Component {
     }
   }
 
-  /*addLeadingZero(val) {
-    return val < 10 ? `0${val}` : val;
-  }
-
-  getTimerStringFromSeconds(s, supressSeconds = false) {
-    let hh = this.addLeadingZero(~~(s / 3600));
-    let mm = this.addLeadingZero(~~((s % 3600) / 60));
-    let ss = this.addLeadingZero(s % 60);
-    return supressSeconds ? `${hh}:${mm}` : `${hh}:${mm}:${ss}`;
-  }*/
-
   getTotalTime() {
     let durationList = this.props.journalEntries.map((entry) => {
       return 60 * entry.duration.h + 1 * entry.duration.m;

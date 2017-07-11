@@ -19,10 +19,20 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <TitleBar title='#100DaysOfCode Journal' subtitle='made by chris' />
-        <ControlBar journalEntries={this.props.journalEntries} onFinishedHandler={this.onFinishedHandler.bind(this)} />
-        <JournalForm journalEntries={this.props.journalEntries} ref='form' />
-        <Journal journalEntries={this.props.journalEntries} />
+        <TitleBar 
+          title='#100DaysOfCode Journal' 
+          subtitle='made by chris' 
+        />
+        <ControlBar 
+          journalEntries={this.props.journalEntries} 
+          onFinishedHandler={this.onFinishedHandler.bind(this)} 
+        />
+        <JournalForm 
+          journalEntries={this.props.journalEntries} ref='form' 
+        />
+        <Journal 
+          journalEntries={this.props.journalEntries} 
+        />
       </div>        
     );
   }

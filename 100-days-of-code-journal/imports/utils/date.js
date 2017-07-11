@@ -1,3 +1,9 @@
+import Moment from 'moment';
+
+export function extractDate(date) {
+  return new Moment(date).format('YYYY-MM-DD');
+}
+
 export function setTimeToMidnight(date) {
   let res = new Date(date);
   res.setHours(0, 0, 0, 0);

@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Moment from 'moment';
 
 import { JournalEntries, findEntry } from './../api/journal-entries';
 
 import { getTimerStringFromSeconds } from './../utils/time';
+import { extractDate } from './../utils/date';
 
 export default class JournalForm extends React.Component {
   constructor() {
@@ -130,10 +130,10 @@ export default class JournalForm extends React.Component {
   setDurationFieldFromTimer(durationSeconds) {
     let currLog = this.refs.log.value;
 
-    let today = new Moment(new Date()).format('YYYY-MM-DD');
+    let today = extractDate(new Date());
     this.refs.date.value = today;
 
-    let entry = this.findEntry(today);
+    let entry = findEntry(today);
 
     if (entry) {
       this.setState({entryId: entry._id});
