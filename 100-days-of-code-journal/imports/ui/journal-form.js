@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'moment';
 
-import { JournalEntries } from './../api/journal-entries';
+import { JournalEntries, findEntry } from './../api/journal-entries';
 
 import { getTimerStringFromSeconds } from './../utils/time';
 
@@ -12,6 +12,14 @@ export default class JournalForm extends React.Component {
     this.duration = '';
     this.log = '';
     this.state = {entryId: -1};
+  }
+
+  createEntry(entry) {
+    JournalEntries.insert(entry);
+  }
+
+  updateEntry(entry) {    
+    JournalEntries.update({_id: this.state.entryId}, entry);
   }
 
   createOrUpdateEntry(date, duration, logData, linkProject, linkUrl) {
@@ -29,14 +37,15 @@ export default class JournalForm extends React.Component {
         url: linkUrl.trim()
       }
     }
+    
+    if (this.state.entryId == -1) {
+      this.createEntry(journalEntry);
+    }
+    else {
+      this.updateEntry(journalEntry);
+    }
 
-    console.log('Adding new journal entry:');
-    console.log(journalEntry);
-    JournalEntries.update({_id: this.state.entryId}, journalEntry, {upsert: true});
-  }
-
-  findEntry(date) {
-    //TODO
+    this.setState({entryId: -1});
   }
 
   populateFields(entry) {
@@ -59,12 +68,6 @@ export default class JournalForm extends React.Component {
     this.refs.duration.value = '';
     this.refs.linkProject.value = '';
     this.refs.linkUrl.value = '';
-  }
-
-  deleteEntry() {
-    if (this.props.journalEntry) {
-      JournalEntries.remove({_id: this.props.journalEntry._id});
-    }
   }
   
   onSubmit(e) {
@@ -93,19 +96,14 @@ export default class JournalForm extends React.Component {
 
   onDateChanged(e) {
     let date = e.target.value;
-    let entries = this.props.journalEntries;
+    let entry = findEntry(date);
 
-    if(!entries) return;
+    if (entry) {
+      this.populateFields(entry);
+      this.setState({entryId: entry._id});
+      console.log(entry._id);
 
-    for (var i = entries.length - 1; i >= 0; i--) {
-      let entry = entries[i]
-      if (date == entry.date) {
-        console.log('log for given date found!');
-        this.populateFields(entry);
-        this.setState({entryId: entry._id});
-
-        return;
-      }
+      return;
     }
     
     this.clearFields(false);
@@ -129,16 +127,24 @@ export default class JournalForm extends React.Component {
 
   }
 
-  setDurationField(durationSeconds) {
-    this.refs.duration.value = getTimerStringFromSeconds(durationSeconds, true);
+  setDurationFieldFromTimer(durationSeconds) {
+    let currLog = this.refs.log.value;
 
     let today = new Moment(new Date()).format('YYYY-MM-DD');
     this.refs.date.value = today;
+
+    let entry = this.findEntry(today);
+
+    if (entry) {
+      this.setState({entryId: entry._id});
+      this.populateFields(entry);
+      this.refs.log.value = this.refs.log.value + '\n' + currLog;
+    }
+
+    this.refs.duration.value = getTimerStringFromSeconds(durationSeconds, true);
   }
   
   render() {
-    console.log('form here:', this.props.currentDuration);
-
     return (
       <div className='form-background'>
         <div className='wrapper'>

@@ -13,7 +13,7 @@ export default class App extends React.Component {
   }*/
 
   onFinishedHandler(durationSeconds) {
-    this.refs.form.setDurationField(durationSeconds);
+    this.refs.form.setDurationFieldFromTimer(durationSeconds);
   }
 
   render() {

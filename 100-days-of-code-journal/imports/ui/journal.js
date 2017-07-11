@@ -38,8 +38,10 @@ export default class Journal extends React.Component {
 
       currDate = addDays(currDate, 1);
     }
-    
+    console.log(entriesJsx);
     return entriesJsx;
+    
+    //return this.props.journalEntries.map((entry) => this.renderDay(entry));
   }
 
   render() {
