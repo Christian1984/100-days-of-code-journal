@@ -36,6 +36,10 @@
   width: 4rem;
 }
 
+.journal-item__list {
+  list-style: square inside;
+}
+
 .journal-item__icon--check {
   fill: green;
 }

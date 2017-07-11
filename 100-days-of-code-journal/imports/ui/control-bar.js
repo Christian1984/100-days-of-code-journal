@@ -5,6 +5,8 @@ import Moment from 'moment';
 
 import ProgressBar from './progress-bar';
 
+import { getTimerStringFromSeconds } from './../utils/time';
+
 export default class ControlBar extends React.Component {
   dailyTargetSeconds = 3600;
   totalTargetDays = 100;
@@ -42,16 +44,24 @@ export default class ControlBar extends React.Component {
     }
   }
 
-  addLeadingZero(val) {
+  onFinishClick() {
+    this.stopStopwatch();
+
+    if (this.props.onFinishedHandler) {
+      this.props.onFinishedHandler(this.state.currentSeconds);
+    }
+  }
+
+  /*addLeadingZero(val) {
     return val < 10 ? `0${val}` : val;
   }
 
-  getTimerStringFromSeconds(s) {
+  getTimerStringFromSeconds(s, supressSeconds = false) {
     let hh = this.addLeadingZero(~~(s / 3600));
     let mm = this.addLeadingZero(~~((s % 3600) / 60));
     let ss = this.addLeadingZero(s % 60);
-    return `${hh}:${mm}:${ss}`;
-  }
+    return supressSeconds ? `${hh}:${mm}` : `${hh}:${mm}:${ss}`;
+  }*/
 
   getTotalTime() {
     let durationList = this.props.journalEntries.map((entry) => {
@@ -61,7 +71,7 @@ export default class ControlBar extends React.Component {
     var totalSeconds = this.state.currentSeconds;
     for(var i in durationList) { totalSeconds+=durationList[i] * 60; }
 
-    return this.getTimerStringFromSeconds(totalSeconds);
+    return getTimerStringFromSeconds(totalSeconds);
   }
 
   render() {
@@ -76,13 +86,13 @@ export default class ControlBar extends React.Component {
               <button className='button' onClick={this.toggleStopwatch.bind(this)}>{this.state.isRunning ? 'Stop' : 'Start'}</button>
               <div className='control-bar__timer label-data-pair'>
                 <div className='label-data-pair__label'>Time (Today):</div>
-                <div className='label-data-pair__data'>{this.getTimerStringFromSeconds(this.state.currentSeconds)}</div>
+                <div className='label-data-pair__data'>{getTimerStringFromSeconds(this.state.currentSeconds)}</div>
               </div>
               <div className='control-bar__timer label-data-pair'>
                 <div className='label-data-pair__label'>Time (Total): </div>
                 <div className='label-data-pair__data'>{this.getTotalTime()}</div>
               </div>
-              <button className='button' onClick={this.stopStopwatch.bind(this)}>Finish</button>
+              <button className='button' onClick={this.onFinishClick.bind(this)}>Finish</button>
             </div>
             <ProgressBar name="Today's Progress" currPercentage={progressToday} />
             <ProgressBar name="Total Progress" currPercentage={progressTotal} />
@@ -93,5 +103,6 @@ export default class ControlBar extends React.Component {
 };
 
 ControlBar.propTypes = {
-  journalEntries: PropTypes.array.isRequired
+  journalEntries: PropTypes.array.isRequired,
+  onFinishedHandler: PropTypes.func
 };    

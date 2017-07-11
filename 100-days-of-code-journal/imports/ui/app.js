@@ -7,12 +7,21 @@ import Journal from './journal';
 import JournalForm from './journal-form';
 
 export default class App extends React.Component {
+  /*constructor() {
+    super();
+    this.state = {duration: undefined};
+  }*/
+
+  onFinishedHandler(durationSeconds) {
+    this.refs.form.setDurationField(durationSeconds);
+  }
+
   render() {
     return (
       <div>
         <TitleBar title='#100DaysOfCode Journal' subtitle='made by chris' />
-        <ControlBar journalEntries={this.props.journalEntries} />
-        <JournalForm />
+        <ControlBar journalEntries={this.props.journalEntries} onFinishedHandler={this.onFinishedHandler.bind(this)} />
+        <JournalForm journalEntries={this.props.journalEntries} ref='form' />
         <Journal journalEntries={this.props.journalEntries} />
       </div>        
     );
