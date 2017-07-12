@@ -16,6 +16,11 @@ export default class App extends React.Component {
     this.refs.form.setDurationFieldFromTimer(durationSeconds);
   }
 
+  onEditClickedHandler(entry) {
+    this.refs.form.populateFields(entry, true);
+    window.scrollTo(0, 0);
+  }
+
   render() {
     return (
       <div>
@@ -28,10 +33,12 @@ export default class App extends React.Component {
           onFinishedHandler={this.onFinishedHandler.bind(this)} 
         />
         <JournalForm 
-          journalEntries={this.props.journalEntries} ref='form' 
-        />
-        <Journal 
           journalEntries={this.props.journalEntries} 
+          ref='form' 
+        />
+        <Journal
+          journalEntries={this.props.journalEntries} 
+          onEditClicked={this.onEditClickedHandler.bind(this)}
         />
       </div>        
     );

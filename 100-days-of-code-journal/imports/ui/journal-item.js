@@ -14,6 +14,10 @@ export default class JournalItem extends React.Component {
 
   editEntry() {
     console.log(`edit button for entry with _id ${this.props.entry._id} clicked!`);
+
+    if (this.props.onEditClicked) {
+      this.props.onEditClicked(this.props.entry);
+    }
   }
 
   renderLogs(logs) {
@@ -115,5 +119,6 @@ export default class JournalItem extends React.Component {
 }
 
 JournalItem.propTypes = {
-  entry: PropTypes.object.isRequired
+  entry: PropTypes.object.isRequired,
+  onEditClicked: PropTypes.func
 }

@@ -48,7 +48,11 @@ export default class JournalForm extends React.Component {
     this.setState({entryId: -1});
   }
 
-  populateFields(entry) {
+  populateFields(entry, populateDate=false) {
+    if (populateDate) {
+      this.refs.date.value = entry.date;
+    }
+
     var duration = `${entry.duration.h}:${entry.duration.m}`;
     this.refs.duration.value = duration;
 
@@ -57,6 +61,9 @@ export default class JournalForm extends React.Component {
 
     this.refs.linkProject.value = entry.link.project;
     this.refs.linkUrl.value = entry.link.url;
+
+    console.log('entry-id: ', entry._id);
+    this.setState({entryId: entry._id});
   }
 
   clearFields(clearDate = true) {
@@ -68,6 +75,8 @@ export default class JournalForm extends React.Component {
     this.refs.duration.value = '';
     this.refs.linkProject.value = '';
     this.refs.linkUrl.value = '';
+    
+    this.setState({entryId: -1});
   }
   
   onSubmit(e) {
@@ -100,14 +109,10 @@ export default class JournalForm extends React.Component {
 
     if (entry) {
       this.populateFields(entry);
-      this.setState({entryId: entry._id});
-      console.log(entry._id);
-
       return;
     }
     
     this.clearFields(false);
-    this.setState({entryId: -1});
   }
 
   onDurationChanged(e) {
@@ -131,16 +136,18 @@ export default class JournalForm extends React.Component {
     let currLog = this.refs.log.value;
 
     let today = extractDate(new Date());
-    this.refs.date.value = today;
 
     let entry = findEntry(today);
 
     if (entry) {
-      this.setState({entryId: entry._id});
       this.populateFields(entry);
       this.refs.log.value = this.refs.log.value + '\n' + currLog;
     }
+    else {
+      this.clearFields(false);
+    }
 
+    this.refs.date.value = today;
     this.refs.duration.value = getTimerStringFromSeconds(durationSeconds, true);
   }
   
