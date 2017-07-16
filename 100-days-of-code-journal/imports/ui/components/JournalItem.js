@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import Moment from 'moment';
 
-import { setTimeToMidnight } from './../utils/date';
+import { setTimeToMidnight } from './../../utils/date';
 
-import { JournalEntries } from './../api/journal-entries';
+import { JournalEntries } from './../../api/journal-entries';
 
 export default class JournalItem extends React.Component {
   deleteEntry() {

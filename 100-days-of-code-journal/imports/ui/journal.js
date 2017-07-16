@@ -1,61 +1,65 @@
+import {Tracker} from 'meteor/tracker';
+
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import JournalItem from './journal-item';
+import { getJournalEntries } from './../api/journal-entries';
 
-import { addDays, setTimeToMidnight } from './../utils/date';
+import TitleBar from './components/TitleBar';
+import ControlBar from './components/ControlBar';
+import JournalList from './components/JournalList';
+import JournalForm from './components/JournalForm';
 
 export default class Journal extends React.Component {
-  renderDay(entry) {
-    return <JournalItem key={entry.date} entry={entry} onEditClicked={this.props.onEditClicked} />;
+  constructor() {
+    super();
+    this.state = {journalEntries: []};
   }
 
-  renderTimeline() {
-    let entries = this.props.journalEntries;
+  componentDidMount() {
+    this.journalTracker = Tracker.autorun(() => {
+      let journalEntries = getJournalEntries();
+      this.setState({journalEntries});
+    })
+  }
 
-    if (entries.length === 0) {
-      //TODO
-      return <div>List empty notification</div>;
-    }
+  componentWillUnmount() {
+    this.journalTracker.stop();
+  }
 
-    var entriesJsx = [];
+  onFinishedHandler(durationSeconds) {
+    this.refs.form.setDurationFieldFromTimer(durationSeconds);
+  }
 
-    let start = setTimeToMidnight(entries[0].date);
-    let end = setTimeToMidnight(new Date());
-
-    var currDate = start;
-    var currIdx = 0;
-
-    while (currDate <= end) {
-      //console.log(currDate.getTime(), setTimeToMidnight(entries[currIdx].date).getTime());
-      if (currIdx < entries.length && currDate.getTime() == setTimeToMidnight(entries[currIdx].date).getTime()) {
-        entriesJsx.push(this.renderDay(entries[currIdx]));
-        currIdx++;
-      }
-      else {
-        entriesJsx.push(this.renderDay({date: currDate.toString(), isSkippedDay: true}));
-      }
-
-      currDate = addDays(currDate, 1);
-    }
-    console.log(entriesJsx);
-    return entriesJsx;
-    
-    //return this.props.journalEntries.map((entry) => this.renderDay(entry));
+  onEditClickedHandler(entry) {
+    this.refs.form.populateFields(entry, true);
+    window.scrollTo(0, 0);
   }
 
   render() {
     return (
-        <div className='journal-list'>
-          <div className='wrapper'>
-            {this.renderTimeline()}
-          </div>
-        </div>
+      <div>
+        <TitleBar 
+          title='#100DaysOfCode Journal' 
+          subtitle='made by chris' 
+        />
+        <ControlBar 
+          journalEntries={this.state.journalEntries} 
+          onFinishedHandler={this.onFinishedHandler.bind(this)} 
+        />
+        <JournalForm 
+          journalEntries={this.state.journalEntries} 
+          ref='form' 
+        />
+        <JournalList
+          journalEntries={this.state.journalEntries} 
+          onEditClicked={this.onEditClickedHandler.bind(this)}
+        />
+      </div>        
     );
   }
 };
 
 Journal.propTypes = {
-  journalEntries: PropTypes.array.isRequired,
-  onEditClicked: PropTypes.func
+  //journalEntries: PropTypes.array.isRequired
 };    

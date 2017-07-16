@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { JournalEntries, findEntry } from './../api/journal-entries';
+import { JournalEntries, findEntry } from './../../api/journal-entries';
 
-import { getTimerStringFromSeconds } from './../utils/time';
-import { extractDate } from './../utils/date';
+import { getTimerStringFromSeconds } from './../../utils/time';
+import { extractDate } from './../../utils/date';
 
 export default class JournalForm extends React.Component {
   constructor() {

@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import Moment from 'moment';
 
-import ProgressBar from './progress-bar';
+import ProgressBar from './ProgressBar';
 
-import { getTimerStringFromSeconds } from './../utils/time';
+import { getTimerStringFromSeconds } from './../../utils/time';
 
 export default class ControlBar extends React.Component {
   dailyTargetSeconds = 3600;

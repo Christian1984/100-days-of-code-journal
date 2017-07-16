@@ -10,3 +10,7 @@ export function findEntry(date) {
 
   return res[0];
 }
+
+export function getJournalEntries() {
+  return JournalEntries.find({}, {sort:{date: 1}}).fetch();
+}
