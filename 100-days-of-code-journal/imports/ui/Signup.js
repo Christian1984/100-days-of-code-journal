@@ -1,6 +1,9 @@
 import React from 'react';
 import { Accounts } from 'meteor/accounts-base';
 
+import TitleBar from './components/TitleBar';
+import LoginSignupForm from './components/LoginSignupForm';
+
 export default class Signup extends React.Component {
   constructor(props) {
     super(props);
@@ -12,8 +15,8 @@ export default class Signup extends React.Component {
   onSubmitSignup(e) {
     e.preventDefault();
 
-    let email = this.refs.email.value;
-    let password = this.refs.password.value;
+    let email = e.target.email.value;
+    let password = e.target.password.value;
 
     Accounts.createUser({
       email,
@@ -24,28 +27,29 @@ export default class Signup extends React.Component {
         return;
       }
 
+      this.setState({err: undefined});
       console.log('SUCCESS: Account created!');
     });
   }
 
   renderError() {
     if (!this.state.err) return;
-    return <div>Ups, something went wrong: {this.state.err.message}</div>
+    return <div className='error'>Ups, something went wrong: {this.state.err.message}</div>
   }
 
   render() {
     return (
       <div>
-        <h1>Signup</h1>
-        {this.renderError()}
-        <form onSubmit={this.onSubmitSignup.bind(this)}>
-          <input type='email' ref='email' placeholder='Email' />
-          <input type='password' ref='password' placeholder='Password' />
-          <button>Signup now!</button>
-        </form>
-
-        <a href='/journal'>TEMP: Goto to Journal...</a>
-        <p>Have an account already? <a href='/'>Login here!</a></p>
+        <TitleBar 
+          title='#100DaysOfCode Journal' 
+          subtitle='made by chris' 
+        />
+        <div className='wrapper'>
+          <h1>Signup</h1>
+          {this.renderError()}
+          <LoginSignupForm isLogin={false} onSubmit={this.onSubmitSignup.bind(this)} />
+          <p>Have an account already? <a href='/'>Login here!</a></p>
+        </div>
       </div>
     );
   }

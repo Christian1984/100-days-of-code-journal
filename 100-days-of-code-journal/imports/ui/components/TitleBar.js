@@ -20,11 +20,17 @@ export default class TitleBar extends React.Component {
       console.log('SUCCESS: User logged out!');
     });
   }
+
+  renderLogoutButton() {
+    if (Meteor.userId()) {
+      return <button className='button button--float-right' onClick={this.onClickLogout.bind(this)}>Logout</button>;
+    }
+  }
   
   render() {
     return (
         <div className='title-bar'>
-          <button className='button button--float-right' onClick={this.onClickLogout.bind(this)}>Logout</button>
+          {this.renderLogoutButton()}
           <div className='wrapper'>
             <div className='title-bar__flex-wrapper'>
               <h1 className='title-bar__title'>{this.props.title}</h1>

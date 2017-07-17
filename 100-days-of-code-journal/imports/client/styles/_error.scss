@@ -1,0 +1,10 @@
+.error {
+  background-color: darkred;
+  border: 1px black solid;
+  border-radius: 1rem;
+  color: white;
+  font-weight: 600;
+  margin-bottom: $standardMargin;
+  margin-top: $standardMargin;
+  padding: $standardMargin;
+}
