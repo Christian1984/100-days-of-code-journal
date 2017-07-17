@@ -1,5 +1,6 @@
+import { Meteor } from 'meteor/meteor';
 import React from 'react';
-import { Router, Route, Switch } from 'react-router';
+import { Redirect, Router, Route, Switch } from 'react-router';
 import { createBrowserHistory } from 'history';
 
 import Journal from './../ui/Journal';
@@ -9,13 +10,43 @@ import Signup from './../ui/Signup';
 
 let browserHistory = createBrowserHistory();
 
+function onEnterPublicRoute(targetComponent) {
+  console.log('INFO: entered public page:');
+
+  if (Meteor.userId()) 
+    return <Redirect to='/journal' />;
+  return targetComponent;
+}
+
+function onEnterPrivateRoute(targetComponent) {
+  console.log('INFO: entered private page:');
+
+  if (!Meteor.userId()) 
+    return <Redirect to='/' />;
+  return targetComponent;
+}
+
 export let router = (
-    <Router history={browserHistory}>
-      <Switch>
-        <Route exact path='/' component={Login} />
-        <Route path='/journal' component={Journal} />
-        <Route path='/signup' component={Signup} />
-        <Route path='*' component={NotFound} />
-      </Switch>
-    </Router> 
-  );
+  <Router history={browserHistory}>
+    <Switch>
+      <Route exact path='/' render={() => onEnterPublicRoute(<Login />)} />
+      <Route path='/journal' render={() => onEnterPrivateRoute(<Journal />)}/>
+      <Route path='/signup' render={() => onEnterPublicRoute(<Signup />)} />
+      <Route path='*' component={NotFound} />
+    </Switch>
+  </Router> 
+);
+
+let publicRoutes = [ '/', '/signup' ];
+let privateRoutes = [ '/journal' ];
+
+export function onAuthChange(isAuthenticated) {
+  let pathName = browserHistory.location.pathname;
+
+  if (isAuthenticated && publicRoutes.includes(pathName)) {
+    browserHistory.push('/');
+  }
+  else if (!isAuthenticated && privateRoutes.includes(pathName)) {
+    browserHistory.push('/journal');    
+  }
+}
