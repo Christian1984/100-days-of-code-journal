@@ -15,7 +15,7 @@ export default class JournalList extends React.Component {
 
     if (entries.length === 0) {
       //TODO
-      return <div>List empty notification</div>;
+      return <div className='journal-item'>Please submit your first log entry above!</div>;
     }
 
     var entriesJsx = [];
