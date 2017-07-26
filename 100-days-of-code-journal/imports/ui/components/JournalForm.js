@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -26,6 +27,7 @@ export default class JournalForm extends React.Component {
     let durationComponents = duration.split(':');
 
     let journalEntry = {
+      userId: Meteor.userId(),
       date: date,
       duration: {
         h: durationComponents[0],

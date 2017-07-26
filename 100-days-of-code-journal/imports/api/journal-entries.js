@@ -7,7 +7,7 @@ export function findEntry(date) {
   Meteor.subscribe('journal');
 
   let userId = Meteor.userId();
-  let res = JournalEntries.find({date: date}).fetch();
+  let res = JournalEntries.find({userId, date: date}).fetch();
   if (res == 0) {
     return undefined;
   }
@@ -20,7 +20,7 @@ export function getJournalEntries() {
 
   let userId = Meteor.userId();
   console.log('getJournalEntries() called, userId:', userId);
-  return JournalEntries.find({}, {sort:{date: 1}}).fetch();
+  return JournalEntries.find({userId}, {sort:{date: 1}}).fetch();
 }
 
 //publish
