@@ -1,15 +1,21 @@
+import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import PropTypes from 'prop-types';
 
 import Moment from 'moment';
 
+import { addLeadingZero } from './../../utils/time';
 import { setTimeToMidnight } from './../../utils/date';
 
 import { JournalEntries } from './../../api/journal-entries';
 
 export default class JournalItem extends React.Component {
   deleteEntry() {
-    JournalEntries.remove({_id: this.props.entry._id});
+    Meteor.call('journalEntries.remove', this.props.entry._id, (err, res) => {
+      if (err) {
+        console.log(err.reason);
+      }
+    });
   }
 
   editEntry() {
@@ -96,7 +102,7 @@ export default class JournalItem extends React.Component {
 
             <div className='label-data-pair label-data-pair--h-margin'>
               <div className='label-data-pair__label'>Duration:</div> 
-              <div className='label-data-pair__data'>{`${entry.duration.h}:${entry.duration.m}`}</div>
+              <div className='label-data-pair__data'>{`${addLeadingZero(entry.duration.h)}:${addLeadingZero(entry.duration.m)}`}</div>
             </div>
           </div>
 

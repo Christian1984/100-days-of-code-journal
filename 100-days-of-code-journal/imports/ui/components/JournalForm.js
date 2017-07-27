@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import { JournalEntries, findEntry } from './../../api/journal-entries';
 
-import { getTimerStringFromSeconds } from './../../utils/time';
+import { addLeadingZero, getTimerStringFromSeconds } from './../../utils/time';
 import { extractDate } from './../../utils/date';
 
 export default class JournalForm extends React.Component {
@@ -12,15 +12,34 @@ export default class JournalForm extends React.Component {
     super();
     this.duration = '';
     this.log = '';
-    this.state = {entryId: -1};
+    this.state = {
+      entryId: -1,
+      err: undefined
+    };
   }
 
   createEntry(entry) {
-    JournalEntries.insert(entry);
+    Meteor.call('journalEntries.insert', entry, (err, res) => {
+      if (err) {
+        this.setState({err});
+        return;
+      }
+      
+      this.setState({err: undefined});
+      this.clearFields(true);
+    })
   }
 
-  updateEntry(entry) {    
-    JournalEntries.update({_id: this.state.entryId}, entry);
+  updateEntry(entry) {
+    Meteor.call('journalEntries.update', {_id: this.state.entryId ,entry}, (err, res) => {
+      if (err) {
+        this.setState({err});
+        return;
+      }
+      
+      this.setState({err: undefined});
+      this.clearFields(true);
+    })
   }
 
   createOrUpdateEntry(date, duration, logData, linkProject, linkUrl) {
@@ -30,8 +49,8 @@ export default class JournalForm extends React.Component {
       userId: Meteor.userId(),
       date: date,
       duration: {
-        h: durationComponents[0],
-        m: durationComponents[1]
+        h: parseInt(durationComponents[0]),
+        m: parseInt(durationComponents[1])
       },
       log: logData.trim().split('\n'),
       link: {
@@ -55,7 +74,7 @@ export default class JournalForm extends React.Component {
       this.refs.date.value = entry.date;
     }
 
-    var duration = `${entry.duration.h}:${entry.duration.m}`;
+    var duration = `${addLeadingZero(entry.duration.h)}:${addLeadingZero(entry.duration.m)}`;
     this.refs.duration.value = duration;
 
     var log = entry.log.join('\n');
@@ -90,17 +109,11 @@ export default class JournalForm extends React.Component {
     let linkProject = e.target.linkProject.value;
     let linkUrl = e.target.linkUrl.value;
 
-    if (!date || !duration || !logData || !linkProject || !linkUrl) {
+    /*if (!date || !duration || !logData || !linkProject || !linkUrl) {
       console.log('Journal Entry not complete!');
       //todo: handle
       return;
-    }
-
-    e.target.date.value = '';
-    e.target.duration.value = '';
-    e.target.log.value = '';
-    e.target.linkProject.value = '';
-    e.target.linkUrl.value = '';
+    }*/
 
     this.createOrUpdateEntry(date, duration, logData, linkProject, linkUrl);
   }
@@ -152,11 +165,27 @@ export default class JournalForm extends React.Component {
     this.refs.date.value = today;
     this.refs.duration.value = getTimerStringFromSeconds(durationSeconds, true);
   }
+
+  renderError() {
+    if (!this.state.err) return;
+
+    return (
+      <div className='error'>
+        <div>
+          Ooops! Something went wrong!
+        </div> 
+        <div>
+          {this.state.err.reason}
+        </div>
+      </div>);
+      
+  }
   
   render() {
     return (
       <div className='form-background'>
         <div className='wrapper'>
+          {this.renderError()}
           <div className='form'>
             <form onSubmit={this.onSubmit.bind(this)}>
               <div className='form__date-time form__row'>
