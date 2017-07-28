@@ -7,7 +7,7 @@ import { addDays, setTimeToMidnight } from './../../utils/date';
 
 export default class JournalList extends React.Component {
   renderDay(entry) {
-    return <JournalItem key={entry.date} entry={entry} onEditClicked={this.props.onEditClicked} />;
+    return <JournalItem key={entry.date} entry={entry} onEditClicked={this.props.onEditClicked} showButtons={this.props.showButtons} />;
   }
 
   renderTimeline() {
@@ -57,5 +57,10 @@ export default class JournalList extends React.Component {
 
 JournalList.propTypes = {
   journalEntries: PropTypes.array.isRequired,
-  onEditClicked: PropTypes.func
-};    
+  onEditClicked: PropTypes.func,
+  showButtons: PropTypes.bool
+};   
+
+JournalList.defaultProps = {
+  showButtons: false
+}; 

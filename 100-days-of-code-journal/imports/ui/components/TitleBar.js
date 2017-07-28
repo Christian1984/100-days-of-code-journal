@@ -31,6 +31,7 @@ export default class TitleBar extends React.Component {
     return (
         <div className='title-bar'>
           {this.renderLogoutButton()}
+          <a href='/' className='button button--float-left'>Home</a>
           <div className='wrapper'>
             <div className='title-bar__flex-wrapper'>
               <h1 className='title-bar__title'>{this.props.title}</h1>

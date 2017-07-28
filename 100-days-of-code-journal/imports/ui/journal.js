@@ -54,6 +54,7 @@ export default class Journal extends React.Component {
         <JournalList
           journalEntries={this.state.journalEntries} 
           onEditClicked={this.onEditClickedHandler.bind(this)}
+          showButtons={true}
         />
       </div>        
     );

@@ -67,6 +67,18 @@ export default class JournalItem extends React.Component {
     );
   }
 
+  renderButtons() {
+    if (this.props.showButtons) {
+      return (
+        <div>
+          <button className='button button--dark' onClick={this.editEntry.bind(this)}>Edit</button>
+          <button className='button button--dark' onClick={this.deleteEntry.bind(this)}>Delete</button>
+          <button className='button button--dark' disabled>Share</button>
+        </div>
+      );
+    }
+  }
+
   render() {
     let entry = this.props.entry;
     let date = new Moment(entry.date).format('L');
@@ -116,9 +128,7 @@ export default class JournalItem extends React.Component {
             {this.renderLink(entry.link)}
           </div>
 
-          <button className='button button--dark' onClick={this.editEntry.bind(this)}>Edit</button>
-          <button className='button button--dark' onClick={this.deleteEntry.bind(this)}>Delete</button>
-          <button className='button button--dark' disabled>Share</button>
+          {this.renderButtons()}
         </div>
     );
   }
@@ -126,5 +136,10 @@ export default class JournalItem extends React.Component {
 
 JournalItem.propTypes = {
   entry: PropTypes.object.isRequired,
-  onEditClicked: PropTypes.func
-}
+  onEditClicked: PropTypes.func,
+  showButtons: PropTypes.bool
+};
+
+JournalItem.defaultProps = {
+  showButtons: false
+};

@@ -4,6 +4,7 @@ import { Redirect, Router, Route, Switch } from 'react-router';
 import { createBrowserHistory } from 'history';
 
 import Journal from './../ui/Journal';
+import JournalViewer from './../ui/JournalViewer';
 import Login from './../ui/Login';
 import NotFound from './../ui/NotFound';
 import Signup from './../ui/Signup';
@@ -32,6 +33,7 @@ export let router = (
       <Route exact path='/' render={() => onEnterPublicRoute(<Login />)} />
       <Route path='/journal' render={() => onEnterPrivateRoute(<Journal />)}/>
       <Route path='/signup' render={() => onEnterPublicRoute(<Signup />)} />
+      <Route path='/viewJournal' component={JournalViewer} />
       <Route path='*' component={NotFound} />
     </Switch>
   </Router> 
@@ -43,10 +45,13 @@ let privateRoutes = [ '/journal' ];
 export function onAuthChange(isAuthenticated) {
   let pathName = browserHistory.location.pathname;
 
+  console.log(isAuthenticated);
+  console.log(pathName);
+
   if (isAuthenticated && publicRoutes.includes(pathName)) {
-    browserHistory.push('/');
+    browserHistory.push('/journal');
   }
   else if (!isAuthenticated && privateRoutes.includes(pathName)) {
-    browserHistory.push('/journal');    
+    browserHistory.push('/');    
   }
 }

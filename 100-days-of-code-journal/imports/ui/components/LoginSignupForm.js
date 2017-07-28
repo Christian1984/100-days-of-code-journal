@@ -2,6 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default class LoginSignupForm extends React.Component {
+  renderUsername() {
+    if (!this.props.isLogin) {
+      return(
+        <div className='label-data-pair form__row'>
+          <div className='label-data-pair__label'>Choose a Username</div>
+          <div className='label-data-pair__data form__child--flex'>
+            <input className='form__input form__input--flex-grow' 
+              type='string' id='username' name='username' ref='username' 
+              placeholder='Username'
+            />
+          </div>
+        </div>
+      );
+    }
+  }
+  
   render() {
     return (
       <div className='wrapper'>
@@ -17,6 +33,8 @@ export default class LoginSignupForm extends React.Component {
                 />
               </div>
             </div>
+
+            {this.renderUsername()}
             
             <div className='label-data-pair form__row'>
               <div className='label-data-pair__label'>Your Password</div>

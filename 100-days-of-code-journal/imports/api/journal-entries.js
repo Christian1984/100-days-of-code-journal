@@ -16,12 +16,17 @@ export function findEntry(date) {
   return res[0];
 }
 
-export function getJournalEntries() {
+export function getJournalEntries(userId = undefined) {
   Meteor.subscribe('journal');
 
-  let userId = Meteor.userId();
+  if (!userId){
+    userId = Meteor.userId();
+  }
+  
   console.log('getJournalEntries() called, userId:', userId);
-  return JournalEntries.find({userId}, {sort:{date: 1}}).fetch();
+  let journalEntries = JournalEntries.find({userId}, {sort:{date: 1}}).fetch();
+  console.log(journalEntries);
+  return journalEntries;
 }
 
 //publish

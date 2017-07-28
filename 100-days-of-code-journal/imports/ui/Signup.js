@@ -15,13 +15,19 @@ export default class Signup extends React.Component {
   onSubmitSignup(e) {
     e.preventDefault();
 
-    let email = e.target.email.value;
-    let password = e.target.password.value;
+    let email = e.target.email.value.trim();
+    let username = e.target.username.value.trim();
+    let password = e.target.password.value.trim();
 
-    Accounts.createUser({
+    let user = {
       email,
+      username,
       password
-    }, (err) => {
+    };
+
+    console.log(user);
+
+    Accounts.createUser(user, (err) => {
       if (err) {
         this.setState({ err });
         return;

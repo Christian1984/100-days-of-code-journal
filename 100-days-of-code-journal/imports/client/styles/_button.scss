@@ -9,10 +9,12 @@
   margin: $miniMargin;
   outline: none;
   padding: $standardMargin;
+  text-decoration: none;
   transition: transform .2s ease, background-color .2s ease;
 
   &:hover, &:focus {
     background-color: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
   }
 
   &:active {
@@ -38,4 +40,9 @@
 .button--float-right {
   margin-top: 0.8rem;
   float: right;
+}
+
+.button--float-left {
+  margin-top: 0.8rem;
+  float: left;
 }
