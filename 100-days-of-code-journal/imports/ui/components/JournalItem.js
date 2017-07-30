@@ -73,7 +73,7 @@ export default class JournalItem extends React.Component {
         <div>
           <button className='button button--dark' onClick={this.editEntry.bind(this)}>Edit</button>
           <button className='button button--dark' onClick={this.deleteEntry.bind(this)}>Delete</button>
-          <button className='button button--dark' disabled>Share</button>
+          {/*<button className='button button--dark' disabled>Share</button>*/}
         </div>
       );
     }

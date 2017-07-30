@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import { parse } from 'query-string';
 
@@ -27,6 +28,20 @@ export default class JournalViewer extends React.Component {
     this.journalTracker.stop();
   }
 
+  renderSignupCallToAction() {
+    if (!Meteor.userId()) {
+      return (
+        <div className='cto-background'>
+          <div className='wrapper'>
+            <div className='cto'>
+              Want to create your own #100DaysOfCode-Journal? <a href='/signup'>Signup here!</a>
+            </div>
+          </div>
+        </div>
+      );
+    }
+  }
+
   render() {
     return (
       <div>
@@ -34,6 +49,7 @@ export default class JournalViewer extends React.Component {
           title='#100DaysOfCode Journal' 
           subtitle='made by chris' 
         />
+        {this.renderSignupCallToAction()}
         <JournalList
           journalEntries={this.state.journalEntries}
         />

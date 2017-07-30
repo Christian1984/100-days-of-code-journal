@@ -1,3 +1,4 @@
+import {Meteor} from 'meteor/meteor';
 import {Tracker} from 'meteor/tracker';
 
 import React from 'react';
@@ -36,7 +37,22 @@ export default class Journal extends React.Component {
     window.scrollTo(0, 0);
   }
 
+  renderShareCallToAction() {
+    if (Meteor.user()) {
+      return (
+        <div className='cto-background'>
+          <div className='wrapper'>
+            <div className='cto'>
+              Want to Share Your Journal? <a href={`/${Meteor.user().username}`}>Share This Link!</a>
+            </div>
+          </div>
+        </div>
+      );
+    }
+  }
+
   render() {
+    console.log(Meteor.user());
     return (
       <div>
         <TitleBar 
@@ -51,6 +67,7 @@ export default class Journal extends React.Component {
           journalEntries={this.state.journalEntries} 
           ref='form' 
         />
+        {this.renderShareCallToAction()}
         <JournalList
           journalEntries={this.state.journalEntries} 
           onEditClicked={this.onEditClickedHandler.bind(this)}
