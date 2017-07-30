@@ -113,6 +113,11 @@ export default class JournalItem extends React.Component {
             </div>
 
             <div className='label-data-pair label-data-pair--h-margin'>
+              <div className='label-data-pair__label'>Day:</div> 
+              <div className='label-data-pair__data'>{this.props.dayCount}/100</div>
+            </div>
+
+            <div className='label-data-pair label-data-pair--h-margin'>
               <div className='label-data-pair__label'>Duration:</div> 
               <div className='label-data-pair__data'>{`${addLeadingZero(entry.duration.h)}:${addLeadingZero(entry.duration.m)}`}</div>
             </div>
@@ -136,6 +141,7 @@ export default class JournalItem extends React.Component {
 
 JournalItem.propTypes = {
   entry: PropTypes.object.isRequired,
+  dayCount: PropTypes.number.isRequired,
   onEditClicked: PropTypes.func,
   showButtons: PropTypes.bool
 };

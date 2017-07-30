@@ -6,8 +6,8 @@ import JournalItem from './JournalItem';
 import { addDays, setTimeToMidnight } from './../../utils/date';
 
 export default class JournalList extends React.Component {
-  renderDay(entry) {
-    return <JournalItem key={entry.date} entry={entry} onEditClicked={this.props.onEditClicked} showButtons={this.props.showButtons} />;
+  renderDay(entry, dayCount) {
+    return <JournalItem key={entry.date} entry={entry} onEditClicked={this.props.onEditClicked} showButtons={this.props.showButtons} dayCount={dayCount} />;
   }
 
   renderTimeline() {
@@ -29,11 +29,11 @@ export default class JournalList extends React.Component {
     while (currDate <= end) {
       //console.log(currDate.getTime(), setTimeToMidnight(entries[currIdx].date).getTime());
       if (currIdx < entries.length && currDate.getTime() == setTimeToMidnight(entries[currIdx].date).getTime()) {
-        entriesJsx.push(this.renderDay(entries[currIdx]));
+        entriesJsx.push(this.renderDay(entries[currIdx], currIdx + 1));
         currIdx++;
       }
       else {
-        entriesJsx.push(this.renderDay({date: currDate.toString(), isSkippedDay: true}));
+        entriesJsx.push(this.renderDay({date: currDate.toString(), isSkippedDay: true}, currIdx + 1));
       }
 
       currDate = addDays(currDate, 1);
