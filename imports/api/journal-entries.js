@@ -45,7 +45,8 @@ let entrySchema = new SimpleSchema({
     optional: true
   },
   date: {
-    type: String //this should be a date at some point
+    type: String,
+    regEx: /^(19|20)\d\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/
   },
   duration: {
     type: Object

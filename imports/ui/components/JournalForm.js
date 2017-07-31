@@ -194,6 +194,7 @@ export default class JournalForm extends React.Component {
                   <div className='label-data-pair__data form__child--flex'>
                     <input className='form__input form__input--flex-grow' 
                       type='date' id='date' name='date' ref='date' 
+                      placeholder='YYYY-MM-DD'
                       onChange={this.onDateChanged.bind(this)} 
                     />
                   </div>
@@ -204,6 +205,7 @@ export default class JournalForm extends React.Component {
                   <div className='label-data-pair__data'>
                     <input className='form__input'
                       type='time' id='duration' name='duration' ref='duration'
+                      placeholder='HH:MM'
                       onChange={this.onDurationChanged.bind(this)}
                     />
                   </div>
