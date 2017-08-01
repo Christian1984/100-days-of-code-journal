@@ -1,3 +1,4 @@
+import { Tracker } from 'meteor/tracker';
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -5,7 +6,9 @@ import Moment from 'moment';
 
 import ProgressBar from './ProgressBar';
 
-import { getTimerStringFromSeconds } from './../../utils/time';
+import { getTimerStringFromSeconds, getSeconds } from './../../utils/time';
+import { setTimeToMidnight, extractDate } from './../../utils/date';
+import { findEntry } from './../../api/journal-entries';
 
 export default class ControlBar extends React.Component {
   dailyTargetSeconds = 3600;
@@ -18,6 +21,26 @@ export default class ControlBar extends React.Component {
       currentSeconds: 0 ,
       isRunning: false
     }
+  }
+
+  componentDidMount() {
+    this.tracker = Tracker.autorun(() => {
+      let today = extractDate(setTimeToMidnight(new Date()));
+      let todayEntry = findEntry(today);
+
+      if (todayEntry) {
+        this.setState({ 
+          currentSeconds: getSeconds(
+            parseInt(todayEntry.duration.h), 
+            parseInt(todayEntry.duration.m)
+          )
+        });
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    this.tracker.stop();
   }
 
   stopWatchTick() {

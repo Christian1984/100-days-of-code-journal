@@ -8,12 +8,10 @@ export function findEntry(date) {
   Meteor.subscribe('journal');
 
   let userId = Meteor.userId();
-  let res = JournalEntries.find({userId, date: date}).fetch();
-  if (res == 0) {
-    return undefined;
+  let res = JournalEntries.findOne({userId, date: date});
+  if (res != undefined) {
+    return res;
   }
-
-  return res[0];
 }
 
 export function getJournalEntries(userId = undefined) {
@@ -71,10 +69,11 @@ let entrySchema = new SimpleSchema({
     type: Object
   },
   'link.project': {
-    type: String //this validation does not work!
+    type: String
   },
   'link.url': {
-    type: SimpleSchema.RegEx.Url //this validation does not work!
+    type: String,
+    regEx: SimpleSchema.RegEx.Url
   }
 });
 
