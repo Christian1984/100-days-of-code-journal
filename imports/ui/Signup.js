@@ -25,8 +25,6 @@ export default class Signup extends React.Component {
       password
     };
 
-    console.log(user);
-
     Accounts.createUser(user, (err) => {
       if (err) {
         this.setState({ err });

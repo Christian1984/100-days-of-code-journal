@@ -109,12 +109,6 @@ export default class JournalForm extends React.Component {
     let linkProject = e.target.linkProject.value;
     let linkUrl = e.target.linkUrl.value;
 
-    /*if (!date || !duration || !logData || !linkProject || !linkUrl) {
-      console.log('Journal Entry not complete!');
-      //todo: handle
-      return;
-    }*/
-
     this.createOrUpdateEntry(date, duration, logData, linkProject, linkUrl);
   }
 
@@ -132,7 +126,6 @@ export default class JournalForm extends React.Component {
 
   onDurationChanged(e) {
     this.duration = e.target.value;
-    console.log(this.duration);
   }
 
   onLogChanged(e) {

@@ -8,4 +8,3 @@ if (!locale) {
 }
 
 Moment.locale(locale);
-console.log('locale:', Moment.locale());

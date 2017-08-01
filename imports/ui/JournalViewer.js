@@ -14,10 +14,7 @@ export default class JournalViewer extends React.Component {
   }
 
   componentDidMount() {
-    console.log('JournalViewer did mount!');
-
     this.journalTracker = Tracker.autorun(() => {
-      console.log('Tracker here!')
       let userId = parse(this.props.location.search).user;
       let journalEntries = getJournalEntries(userId);
       this.setState({journalEntries});

@@ -27,7 +27,6 @@ export default class JournalList extends React.Component {
     var currIdx = 0;
 
     while (currDate <= end) {
-      //console.log(currDate.getTime(), setTimeToMidnight(entries[currIdx].date).getTime());
       if (currIdx < entries.length && currDate.getTime() == setTimeToMidnight(entries[currIdx].date).getTime()) {
         entriesJsx.push(this.renderDay(entries[currIdx], currIdx + 1));
         currIdx++;
@@ -38,7 +37,7 @@ export default class JournalList extends React.Component {
 
       currDate = addDays(currDate, 1);
     }
-    console.log(entriesJsx);
+
     return entriesJsx;
     
     //return this.props.journalEntries.map((entry) => this.renderDay(entry));
