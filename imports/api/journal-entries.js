@@ -64,7 +64,8 @@ let entrySchema = new SimpleSchema({
     type: Object
   },
   'link.project': {
-    type: String
+    type: String,
+    min: 1
   },
   'link.url': {
     type: String,
