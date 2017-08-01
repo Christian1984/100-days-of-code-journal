@@ -52,7 +52,6 @@ export default class Journal extends React.Component {
   }
 
   render() {
-    console.log(Meteor.user());
     return (
       <div>
         <TitleBar 

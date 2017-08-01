@@ -83,7 +83,6 @@ export default class JournalForm extends React.Component {
     this.refs.linkProject.value = entry.link.project;
     this.refs.linkUrl.value = entry.link.url;
 
-    console.log('entry-id: ', entry._id);
     this.setState({entryId: entry._id});
   }
 

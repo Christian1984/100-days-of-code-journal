@@ -21,18 +21,13 @@ export function getJournalEntries(userId = undefined) {
     userId = Meteor.userId();
   }
   
-  console.log('getJournalEntries() called, userId:', userId);
   let journalEntries = JournalEntries.find({userId}, {sort:{date: 1}}).fetch();
-  console.log(journalEntries);
   return journalEntries;
 }
 
 //publish
 if (Meteor.isServer) {
-  console.log('publish!');
-
   Meteor.publish('journal', () => {
-    console.log('publish-callback');
     return JournalEntries.find({});
   });
 }

@@ -12,16 +12,12 @@ import Signup from './../ui/Signup';
 let browserHistory = createBrowserHistory();
 
 function onEnterPublicRoute(targetComponent) {
-  console.log('INFO: entered public page:');
-
   if (Meteor.userId()) 
     return <Redirect to='/journal' />;
   return targetComponent;
 }
 
 function onEnterPrivateRoute(targetComponent) {
-  console.log('INFO: entered private page:');
-
   if (!Meteor.userId()) 
     return <Redirect to='/' />;
   return targetComponent;
@@ -44,9 +40,6 @@ let privateRoutes = [ '/journal' ];
 
 export function onAuthChange(isAuthenticated) {
   let pathName = browserHistory.location.pathname;
-
-  console.log(isAuthenticated);
-  console.log(pathName);
 
   if (isAuthenticated && publicRoutes.includes(pathName)) {
     browserHistory.push('/journal');
