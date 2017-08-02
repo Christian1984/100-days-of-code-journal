@@ -5,6 +5,7 @@ import { parse } from 'query-string';
 import { getJournalEntries } from './../api/journal-entries';
 
 import TitleBar from './components/TitleBar';
+import StatsBar from './components/StatsBar';
 import JournalList from './components/JournalList';
 
 export default class JournalViewer extends React.Component {
@@ -45,6 +46,10 @@ export default class JournalViewer extends React.Component {
         <TitleBar 
           title='#100DaysOfCode Journal' 
           subtitle='made by chris' 
+        />
+        <StatsBar
+          journalEntries={this.state.journalEntries}
+          currentSeconds={0}
         />
         {this.renderSignupCallToAction()}
         <JournalList
