@@ -92,9 +92,9 @@ export default class ControlBar extends React.Component {
           <div className='wrapper'>
             <div className='control-bar__flex-wrapper'>
               <button className='button' onClick={this.toggleStopwatch.bind(this)}>{this.state.isRunning ? 'Stop' : 'Start'}</button>
-              <div className='control-bar__timer label-data-pair'>
-                <div className='label-data-pair__label label-data-pair__label--size-l'>Time (Today):</div>
-                <div className='label-data-pair__data label-data-pair__data--size-l'>{getTimerStringFromSeconds(this.state.currentSeconds)}</div>
+              <div className='control-bar__timer label-data-pair label-data-pair--flex-grow'>
+                <div className='label-data-pair__label label-data-pair--center label-data-pair__label--size-l'>Time (Today)</div>
+                <div className='label-data-pair__data label-data-pair--center label-data-pair__data--size-l'>{getTimerStringFromSeconds(this.state.currentSeconds)}</div>
               </div>
               <button className='button' onClick={this.onFinishClick.bind(this)}>Finish</button>
             </div>

@@ -1,6 +1,10 @@
 .label-data-pair {
 }
 
+.label-data-pair--center {
+  text-align: center;
+}
+
 .label-data-pair__label {
   font-size: $labelFontSize;
   font-weight: $labelFontWeight;
