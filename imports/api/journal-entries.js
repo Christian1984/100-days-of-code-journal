@@ -2,6 +2,8 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 
+import { isDayInFuture } from './../utils/date';
+
 export const JournalEntries = new Mongo.Collection('JournalEntries');
 
 export function findEntry(date) {
@@ -82,6 +84,10 @@ Meteor.methods({
       throw new Meteor.Error(403, 'User not authenticated. Will not write to database!');
     }
 
+    if (isDayInFuture(entry.date)) {
+      throw new Meteor.Error(403, 'Please do not submit logs for the future!');
+    }
+
     entrySchema.validate(entry);
     JournalEntries.insert(entry);
 
@@ -90,6 +96,10 @@ Meteor.methods({
   'journalEntries.update'(entryObj) {
     if (!this.userId) {
       throw new Error('User not authenticated. Will not write to database!');
+    }
+
+    if (isDayInFuture(entryObj.entry.date)) {
+      throw new Meteor.Error(403, 'Please do not submit logs for the future!');
     }
 
     entrySchema.validate(entryObj.entry);

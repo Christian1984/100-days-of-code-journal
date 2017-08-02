@@ -21,3 +21,11 @@
   margin-left: 1rem;
   margin-right: 1rem;
 }
+
+.label-data-pair__label--size-l {
+  font-size: 1.6 * $labelFontSize;
+}
+
+.label-data-pair__data--size-l {
+  font-size: 1.6 * $textFontSize;  
+}

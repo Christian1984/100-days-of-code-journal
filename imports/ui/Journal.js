@@ -8,13 +8,17 @@ import { getJournalEntries } from './../api/journal-entries';
 
 import TitleBar from './components/TitleBar';
 import ControlBar from './components/ControlBar';
+import StatsBar from './components/StatsBar';
 import JournalList from './components/JournalList';
 import JournalForm from './components/JournalForm';
 
 export default class Journal extends React.Component {
   constructor() {
     super();
-    this.state = {journalEntries: []};
+    this.state = {
+      journalEntries: [],
+      currentSeconds: 0
+    };
   }
 
   componentDidMount() {
@@ -28,13 +32,18 @@ export default class Journal extends React.Component {
     this.journalTracker.stop();
   }
 
-  onFinishedHandler(durationSeconds) {
-    this.refs.form.setDurationFieldFromTimer(durationSeconds);
+  onFinishedHandler() {
+    this.refs.form.setDurationFieldFromTimer(this.state.currentSeconds);
   }
 
   onEditClickedHandler(entry) {
     this.refs.form.populateFields(entry, true);
     window.scrollTo(0, 0);
+  }
+
+  onTickHandler(seconds) {
+    console.log('tick!');
+    this.setState({currentSeconds: seconds});
   }
 
   renderShareCallToAction() {
@@ -58,9 +67,13 @@ export default class Journal extends React.Component {
           title='#100DaysOfCode Journal' 
           subtitle='made by chris' 
         />
-        <ControlBar 
-          journalEntries={this.state.journalEntries} 
-          onFinishedHandler={this.onFinishedHandler.bind(this)} 
+        <ControlBar
+          onFinishedHandler={this.onFinishedHandler.bind(this)}
+          externalOnTickHandler={this.onTickHandler.bind(this)}
+        />
+        <StatsBar
+          journalEntries={this.state.journalEntries}
+          currentSeconds={this.state.currentSeconds}
         />
         <JournalForm 
           journalEntries={this.state.journalEntries} 
